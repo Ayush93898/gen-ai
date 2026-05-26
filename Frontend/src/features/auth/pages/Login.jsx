@@ -1,5 +1,5 @@
 import React from "react";
-import {useNavigate, Link} from 'react-router'
+import {Link} from 'react-router'
 
 import "../auth.form.scss";
 import "../../../style/button.scss"; // button ka alg se seperate folder bana dia
@@ -37,7 +37,7 @@ const Login = () => {
 
         <p>Dont't have an account ? <Link to={"/register"}>Register</Link></p>
       </div>
-    </main>
+    </main> 
   );
 };
 

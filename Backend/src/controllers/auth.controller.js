@@ -99,7 +99,7 @@ const loginUserController = async (req, res) => {
 /**
  * @name logoutUserController
  * @description clear token from the user cookie and add token in the blacklist
- * @access PUBLIC
+ * @access Public
  */
 const logoutUserController = async (req, res) => {
   try {
@@ -109,6 +109,7 @@ const logoutUserController = async (req, res) => {
       await tokenBlacklistModel.create({ token });
     }
 
+    // clear the cookie
     res.clearCookie("token");
     res.status(200).json({ message: "User logged out successfully" });
   } catch (error) {
@@ -119,8 +120,9 @@ const logoutUserController = async (req, res) => {
 /**
  * @name getMeController
  * @description get the current logged in user details
- * @access PRIVATE
+ * @access Private
  */
+
 const getMeController = async (req, res) => {
   try {
     const user = await userModel.findById(req.user.id);

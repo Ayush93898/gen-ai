@@ -1,19 +1,16 @@
 import React from "react";
-import {useNavigate, Link} from 'react-router'
+import { Link } from "react-router";
 
 import "../auth.form.scss";
 import "../../../style/button.scss";
 
 const Register = () => {
-
-  const navigate = useNavigate()
-
   const handleSubmit = (e) => {
     e.preventDefault();
   };
   return (
     <main>
-      <div className="form-container">
+      <div className="form-container"> 
         <h1>Register</h1>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
@@ -46,7 +43,9 @@ const Register = () => {
           <button className="button primary-button">Register</button>
         </form>
 
-        <p>Already have an account ? <Link to={"/login"}>Login</Link></p>
+        <p>
+          Already have an account ? <Link to={"/login"}>Login</Link>
+        </p>
       </div>
     </main>
   );
