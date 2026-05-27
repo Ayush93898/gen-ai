@@ -3,9 +3,13 @@ In frontend we follow the features based folder structure, as appllication have 
 as in total we have 4 layers
     UI
      (it includes folders like- component, pages)
+
     Hook-for mananging state and api layers
      (it include folder such as - hooks)
-    State-to store data in frontend
+
+    State-to store data in frontend , user state (basic loggedin user ka data) and loading state(api se info tak aane ke beech ka samay)
      (it includes file like- auth.context.jsx or more)
+
+
     API-communicate with backend on behalf of frontend
      (and it include folder - Services - have a file auth.api.js) 

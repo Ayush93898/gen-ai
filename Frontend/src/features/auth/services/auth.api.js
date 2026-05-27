@@ -1,28 +1,22 @@
 import axios from "axios";
 
-// so we write 4 API's
+// so we write 4 fn -- that interact with 4 api's which we wrote in backend section
 
 // as withCredentials:true , har ek fn me dena pad raha hai: i.e repetetive code
 // we can stop it by making an instance
 const api = axios.create({
   baseURL: "http://localhost:3000",
-  withCredentials: true,
+  withCredentials: true, // tells axios to include cookies (and other credentials like auth headers) in the request.
 });
 
 // register
 export async function register({ username, email, password }) {
   try {
-    const response = await api.post(
-      "/api/auth/register",
-      {
-        username,
-        email,
-        password,
-      },
-      //   {
-      //     withCredentials: true, // tells axios to include cookies (and other credentials like auth headers) in the request.
-      //   },
-    );
+    const response = await api.post("/api/auth/register", {
+      username,
+      email,
+      password,
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -32,11 +26,7 @@ export async function register({ username, email, password }) {
 // login
 export async function login(email, password) {
   try {
-    const response = await api.post(
-      "/api/auth/login",
-      { email, password },
-      //   { withCredentials: true },
-    );
+    const response = await api.post("/api/auth/login", { email, password });
     return response.data;
   } catch (error) {
     console.log(error);
@@ -46,11 +36,7 @@ export async function login(email, password) {
 //logout
 export async function logout() {
   try {
-    const response = await api.get(
-      "/api/auth/login",
-      {},
-      //   { withCredentials: true },
-    );
+    const response = await api.get("/api/auth/login", {});
     return response.data;
   } catch (error) {
     console.log(error);
@@ -60,11 +46,7 @@ export async function logout() {
 //whoami
 export async function getMe() {
   try {
-    const response = await api.get(
-      "/api/auth/get-me",
-      {},
-      //   { withCredentials: true },
-    );
+    const response = await api.get("/api/auth/get-me", {});
     return response.data;
   } catch (error) {
     console.log(error);
