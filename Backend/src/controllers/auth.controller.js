@@ -134,9 +134,7 @@ const getMeController = async (req, res) => {
     res.status(200).json({
       message: "User details fetched successfully",
       user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
+        name: user.username  
       },
     });
   } catch (error) {

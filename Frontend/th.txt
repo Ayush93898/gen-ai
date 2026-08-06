@@ -13,3 +13,14 @@ as in total we have 4 layers
 
     API-communicate with backend on behalf of frontend
      (and it include folder - Services - have a file auth.api.js) 
+
+
+    // AI part
+
+    On the behalf of the user -> it give you (self descrip, Res[pdf], job descrip)
+    so in teen cheezo ko server dega ai(gemini LLM ) ko and report (JSON) generate hogi
+    include - tech qs, behavioral qs, skills gaps, prep plans
+    and report can be save in db( need schema)
+
+    // for api go to the gemini docs 
+    //  and choose model in such a way ki, it gives structured output (go to structure output )
