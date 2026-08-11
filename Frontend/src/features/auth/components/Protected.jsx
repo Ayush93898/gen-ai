@@ -12,7 +12,7 @@ const Protected = ({ children }) => {
     );
   }
   if (!user) {
-    return <Navigate to="/login" />; // ✅ redirects + stops rendering
+    return <Navigate to="/login" />; // 
   }
 
   return children; // logged in → show the actual page

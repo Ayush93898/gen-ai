@@ -36,7 +36,7 @@ export async function login(email, password) {
 //logout
 export async function logout() {
   try {
-    const response = await api.get("/api/auth/login", {});
+    const response = await api.get("/api/auth/logout");
     return response.data;
   } catch (error) {
     console.log(error);
