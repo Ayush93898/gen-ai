@@ -37,7 +37,7 @@ const registerUserController = async (req, res) => {
   });
 
   const token = jwt.sign(
-    { id: user._id, username: user.username },
+    { id: user._id, username: user.username }, // payload
     process.env.JWT_SECRET,
     { expiresIn: "1d" },
   );
@@ -134,7 +134,7 @@ const getMeController = async (req, res) => {
     res.status(200).json({
       message: "User details fetched successfully",
       user: {
-        name: user.username  
+        name: user.username,
       },
     });
   } catch (error) {

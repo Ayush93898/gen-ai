@@ -131,4 +131,4 @@ const interviewReportModel = mongoose.model(
   interviewReportSchema,
 );
 
-module.exports = interviewReportModel
+module.exports = interviewReportModel;
