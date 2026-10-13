@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
  * resume text - String
  * self description - String , // res or self dono me se ek
  *
- * (Provided by Ai)
+ * (Provided by Ai -- things we using ai toh generate things)
  * Match score : Number
  * Tech qs -
  *      [{
@@ -21,7 +21,7 @@ const mongoose = require("mongoose");
  *      },{},{},....]
  * Skill gaps - [{
  *              skill:"",
- *              severity:{ typp : String, enum:["low","med","high"]},
+ *              severity:{ type : String, enum:["low","med","high"]},
  *              }]
  * Prep plan - [{
  *              day:Number,
