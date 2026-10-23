@@ -1,34 +1,57 @@
-const pdfParse = require("pdf-parse");
+const { PDFParse } = require("pdf-parse");
 const generateInterviewReport = require("../services/ai.service");
 const interviewReportModel = require("../models/interviewReport.model");
 
-/**
- * @name generateInterviewReportController
- * @description generate a interview report of user on the basis of user self description, resume pdf and job description
- * @access Private
- */
 const generateInterviewReportController = async (req, res) => {
-  const resumeContent = pdfParse(req.file.buffer);
-  const { selfDescription, jobDescription } = req.body;
+  try {
+    const { selfDescription, jobDescription } = req.body;
 
-  const interviewReportByAi = await generateInterviewReport({
-    resume: resumeContent,
-    selfDescription,
-    jobDescription,
-  });
+    if (!req.file || !req.file.buffer) {
+      return res.status(400).json({
+        message: "Resume PDF is required",
+      });
+    }
 
-  const interviewReport = await interviewReportModel.create({
-    user: req.user.id,
-    resume: resumeContent,
-    selfDescription,
-    jobDescription,
-    ...interviewReportByAi, // for tech/behav qs
-  });
+    if (!selfDescription || !jobDescription) {
+      return res.status(400).json({
+        message: "selfDescription and jobDescription are required",
+      });
+    }
 
-  res.status(201).json({
-    message: "interview report generated successfully!!",
-    interviewReport,
-  });
+    const pdf = new PDFParse({ data: req.file.buffer });
+    const pdfData = await pdf.getText();
+    const resumeText = pdfData.text?.trim() || "";
+
+    const interviewReportByAi = await generateInterviewReport({
+      resume: resumeText,
+      selfDescription,
+      jobDescription,
+    });
+
+    const interviewReport = await interviewReportModel.create({
+      user: req.user.id,
+      resume: resumeText,
+      selfDescription,
+      jobDescription,
+      matchScore: interviewReportByAi.matchScore,
+      technicalQuestions: interviewReportByAi.technicalQuestions,
+      behavioralQuestion: interviewReportByAi.behavioralQuestions,
+      skillGaps: interviewReportByAi.skillGaps,
+      preparationPlans: interviewReportByAi.preparationPlan,
+    });
+
+    return res.status(201).json({
+      message: "Interview report generated successfully",
+      interviewReport,
+    });
+  } catch (error) {
+    console.error("generateInterviewReportController error:", error);
+
+    return res.status(500).json({
+      message: "Failed to generate interview report",
+      error: error.message,
+    });
+  }
 };
 
 module.exports = { generateInterviewReportController };
